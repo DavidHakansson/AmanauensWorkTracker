@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}View Hours{% endblock %}
+{% block content %}
+<h2 class="mt-5">Your Work Hours</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Hours Worked</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for work_hour in work_hours %}
+        <tr>
+            <td>{{ work_hour.date }}</td>
+            <td>{{ work_hour.hours }}</td>
+            <td>{{ work_hour.description }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="3">No hours logged yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="/">Back to Home</a>
+{% endblock %}

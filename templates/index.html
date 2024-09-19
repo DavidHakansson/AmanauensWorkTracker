@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Work Hours Tracker{% endblock %}
+{% block content %}
+
+<h1>Add New Work Hours</h1>
+<form action="/submit_hours" method="POST">
+    <label for="date">Date (YYYY-MM-DD):</label>
+    <input type="text" name="date" id="date" placeholder="2024-09-19" required><br><br>
+    
+    <label for="hours">Hours Worked:</label>
+    <input type="number" name="hours" id="hours" placeholder="0.0" required><br><br>
+
+    <label for="description">Description:</label>
+    <input type="text" name="description" id="description" placeholder="What did you do?" required><br><br>
+    
+    <button type="submit">Submit</button>
+</form>
+
+<h2 class="mt-5">Your Logged Work Hours</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Hours Worked</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for work_hour in work_hours %}
+        <tr>
+            <td>{{ work_hour.date }}</td>
+            <td>{{ work_hour.hours }}</td>
+            <td>{{ work_hour.description }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="3">No hours logged yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
