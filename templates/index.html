@@ -2,27 +2,42 @@
 {% block title %}Work Hours Tracker{% endblock %}
 {% block content %}
 
-<h1>Add New Work Hours</h1>
 <form action="/submit_hours" method="POST">
-    <label for="date">Date (YYYY-MM-DD):</label>
-    <input type="text" name="date" id="date" placeholder="2024-09-19" required><br><br>
-    
-    <label for="hours">Hours Worked:</label>
-    <input type="number" name="hours" id="hours" placeholder="0.0" required><br><br>
-
-    <label for="description">Description:</label>
-    <input type="text" name="description" id="description" placeholder="What did you do?" required><br><br>
-    
-    <button type="submit">Submit</button>
+    <table class="table work-hours-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Hours Worked</th>
+                <th>Description</th>
+                <th></th> 
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" class="form-control" name="date" id="date" placeholder="YYYY-MM-DD" required></td>
+                <td><input type="number" class="form-control" name="hours" id="hours" placeholder="0.0" required step="0.1"></td>
+                <td>
+                    <select class="form-control" name="description" id="description" required>
+                        <option value="" disabled selected>Select Description</option>
+                        <option value="lab session">Lab Session</option>
+                        <option value="preparation">Preparation</option>
+                        <option value="meeting">Meeting</option>
+                    </select>
+                </td>
+                <td><button type="submit" class="btn btn-primary work-hours-table-button">Track</button></td> 
+            </tr>
+        </tbody>
+    </table>
 </form>
 
-<h2 class="mt-5">Your Logged Work Hours</h2>
-<table class="table">
+
+<table class="table work-hours-table">
     <thead>
         <tr>
             <th>Date</th>
             <th>Hours Worked</th>
             <th>Description</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -31,10 +46,11 @@
             <td>{{ work_hour.date }}</td>
             <td>{{ work_hour.hours }}</td>
             <td>{{ work_hour.description }}</td>
+            <td><button type="delete" class="btn btn-danger work-hours-table-button">Delete</button></td> 
         </tr>
         {% else %}
         <tr>
-            <td colspan="3">No hours logged yet.</td>
+            <td colspan="4">No hours logged yet.</td>
         </tr>
         {% endfor %}
     </tbody>
